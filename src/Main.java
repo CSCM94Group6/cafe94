@@ -28,7 +28,7 @@ public class Main {
 		ArrayList<Table> tables = new ArrayList<>(Arrays.asList(tableOfTwo, tableOfFour, tableOfEight, tableOfTen));
 		
 		//Constants to be used repeatedly throughtout the program
-		//(NB: should be final)
+		//(NB: should be final) hi
 		String action = "1 to Book or 2 to Order";
 		String enterId = "Enter your user id: ";
 		String register = "1 = new user, 2 = registered user, 3 = exit: ";
