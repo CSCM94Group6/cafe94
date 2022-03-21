@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) {
 		HashMap<String, Booking> bookings = new HashMap<>();
 		ArrayList<Order> orders = new ArrayList<Order>();
-		HashMap<Integer, Customer> customers = new HashMap<>();
+		//HashMap<Integer, Customer> customers = new HashMap<>();
 		Table tableOfTwo = new Table(2,2);
 		Table tableOfFour = new Table(4,4);
 		Table tableOfEight = new Table(8,8);
@@ -84,7 +84,7 @@ public class Main {
 				//and stores in the database. (NB all magic numbers will be changed to
 				//final variables)
 				if (mainOption == 1) {
-					boolean finished = false;
+					/*boolean finished = false;
 					do {
 						System.out.println("lets get you registered");
 						customers.put(keyCustomer, UserInteract.addCustomer());
@@ -96,8 +96,8 @@ public class Main {
 							UserInteract.optionRange(custOption,1,2);
 						}
 						if (custOption == 2) finished = true;
-					} while(!finished);
-
+					} while(!finished);*/
+					MethodsAndStorage.addCustomer();
 					//if the user is a registered customer, then proceed with either
 					//booking or placing an order
 				} else if (mainOption == 2){
@@ -106,7 +106,7 @@ public class Main {
 						//user id keeps track of who is making the booking or
 						//placing the order
 						userId = UserInteract.enterInteger(enterId);
-						boolean valid = customers.containsKey(userId);
+						boolean valid = MethodsAndStorage.showCustomers().containsKey(userId);
 						while (!valid) {
 							userId = UserInteract.enterInteger("This user does not exist, enter a valid Id or press 0 to register: ");
 							if (userId == 0) {
@@ -126,7 +126,7 @@ public class Main {
 						//if the user chooses to make a booking, we execute the block of
 						//code below
 						if (bookOrOrder == 1) {
-							boolean finBooking = false;
+							/*boolean finBooking = false;
 							do {
 								Booking booking = UserInteract.bookAtable();
 								String key1 = booking.getDate() + booking.getTime() + "a";
@@ -239,7 +239,9 @@ public class Main {
 									finBooking = true;
 									finished = true;
 								}
-							}while(!finBooking);
+							}while(!finBooking);*/
+							MethodsAndStorage.makeBooking();
+							finished = true;
 						}
 
 						//if the user wants to place an order, the following block of code
@@ -284,19 +286,19 @@ public class Main {
 				} else exit = true;
 
 				//display all customers in the database
-				for (Customer c : customers.values()) {
+				for (Customer c : MethodsAndStorage.showCustomers().values()) {
 					System.out.println(c);
 				}
 
 				//display all orders in the database
 				for (Order o: orders) {
-					String name = customers.get(o.getCustId()).getFirstName();
+					String name = MethodsAndStorage.showCustomers().get(o.getCustId()).getFirstName();
 					System.out.format("Customer name: %S%n", name);
 					System.out.print(o);
 				}
 
 				//display all bookings in the database
-				for (Table t : tables) {
+				for (Table t : MethodsAndStorage.showBookings()) {
 					System.out.print(t);
 				}
 			} while (!exit);
