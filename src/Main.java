@@ -11,6 +11,10 @@ public class Main {
 		HashMap<String, Booking> bookings = new HashMap<>();
 		ArrayList<Order> orders = new ArrayList<Order>();
 		HashMap<Integer, Customer> customers = new HashMap<>();
+		Table tableOfTwo = new Table(2,2);
+		Table tableOfFour = new Table(4,4);
+		Table tableOfEight = new Table(8,8);
+		Table tableOfTen = new Table(10,10);
 		
 		//Sample menu items for a customer to select from
 		Menu item1 = new Menu("Rice", 5.50, 1);
@@ -21,6 +25,7 @@ public class Main {
 		
 		//The main menu contains all food items and can be viewed by all customers
 		ArrayList<Menu> mainMenu = new ArrayList<Menu>(Arrays.asList(item1, item2, item3, item4, item5));
+		ArrayList<Table> tables = new ArrayList<>(Arrays.asList(tableOfTwo, tableOfFour, tableOfEight, tableOfTen));
 		
 		//Constants to be used repeatedly throughtout the program
 		//(NB: should be final)
@@ -108,25 +113,106 @@ public class Main {
 						boolean finBooking = false;
 						do {
 							Booking booking = bookAtable();
-							//we need a unique key for each booking. the key is a
-							//Concatenation of the date and time. this ensures that
-							//tables are not booked twice for the same time period
-							keyBooking = booking.getDate() + booking.getTime();
-							//next, we store the booking
-							if (bookings.isEmpty()) bookings.put(keyBooking, booking);
-							else {
-								while (bookings.containsKey(keyBooking)) {
-									System.out.println("Please select another day or time:");
-									int dateI = enterInteger("Date(format 0101 for jan 1): ");
-									int timeI = enterInteger("Time (hours only between 08 an 18, and must be two digits): ");
-									booking.setDate(Integer.toString(dateI));
-									booking.setTime(Integer.toString(timeI)); 
-									keyBooking = booking.getDate() + booking.getTime();
+							String key1 = booking.getDate() + booking.getTime() + "a";
+							String key2 = booking.getDate() + booking.getTime() + "b";
+							String key3 = booking.getDate() + booking.getTime() + "c";
+							String key4 = booking.getDate() + booking.getTime() + "d";
+							boolean contains2 = tableOfTwo.getBookings().containsKey(key1)
+									&& tableOfTwo.getBookings().containsKey(key2)
+									&& tableOfTwo.getBookings().containsKey(key3)
+									&& tableOfTwo.getBookings().containsKey(key4);
+							boolean contains4 = tableOfFour.getBookings().containsKey(key1)
+									&& tableOfFour.getBookings().containsKey(key2)
+									&& tableOfFour.getBookings().containsKey(key3)
+									&& tableOfFour.getBookings().containsKey(key4);
+							boolean contains8 = tableOfEight.getBookings().containsKey(key1)
+									&& tableOfEight.getBookings().containsKey(key2);
+							boolean contains10 = tableOfEight.getBookings().containsKey(key1);
+							if (booking.getNumOfGuests() < 3){
+								if(tableOfTwo.isAvailable() && !contains2) tableOfTwo.addBooking(booking);
+								else if (tableOfFour.isAvailable() && !contains4) tableOfFour.addBooking(booking);
+								else{
+									while (contains2) {
+										System.out.println("Please select another day or time:");
+										int dateI = enterInteger("Date(format 0101 for jan 1): ");
+										int timeI = enterInteger("Time (hours only between 08 an 18, and must be two digits): ");
+										booking.setDate(Integer.toString(dateI));
+										booking.setTime(Integer.toString(timeI));
+										key1 = booking.getDate() + booking.getTime() + "a";
+										key2 = booking.getDate() + booking.getTime() + "b";
+										key3 = booking.getDate() + booking.getTime() + "c";
+										key4 = booking.getDate() + booking.getTime() + "d";
+										contains2 = tableOfTwo.getBookings().containsKey(key1)
+												&& tableOfTwo.getBookings().containsKey(key2)
+												&& tableOfTwo.getBookings().containsKey(key3)
+												&& tableOfTwo.getBookings().containsKey(key4);
+									}
+									tableOfTwo.addBooking(booking);
 								}
-								bookings.put(keyBooking, booking);
+							}
+							else if (booking .getNumOfGuests() > 2
+									&& booking.getNumOfGuests() < 5) {
+								if(tableOfFour.isAvailable() && !contains4) tableOfFour.addBooking(booking);
+								else if(tableOfEight.isAvailable() && !contains8) tableOfEight.addBooking(booking);
+								else{
+									while (contains4) {
+										System.out.println("Please select another day or time:");
+										int dateI = enterInteger("Date(format 0101 for jan 1): ");
+										int timeI = enterInteger("Time (hours only between 08 an 18, and must be two digits): ");
+										booking.setDate(Integer.toString(dateI));
+										booking.setTime(Integer.toString(timeI));
+										key1 = booking.getDate() + booking.getTime() + "a";
+										key2 = booking.getDate() + booking.getTime() + "b";
+										key3 = booking.getDate() + booking.getTime() + "c";
+										key4 = booking.getDate() + booking.getTime() + "d";
+										contains4 = tableOfFour.getBookings().containsKey(key1)
+												&& tableOfFour.getBookings().containsKey(key2)
+												&& tableOfFour.getBookings().containsKey(key3)
+												&& tableOfFour.getBookings().containsKey(key4);
+									}
+									tableOfFour.addBooking(booking);
+								}
+							}
+							else if (booking.getNumOfGuests() > 4
+									&& booking.getNumOfGuests() < 9){
+								if(tableOfEight.isAvailable() && !contains8) tableOfEight.addBooking(booking);
+								else if(tableOfTen.isAvailable() && !contains10) tableOfTen.addBooking(booking);
+								else{
+									while (contains8) {
+										System.out.println("Please select another day or time:");
+										int dateI = enterInteger("Date(format 0101 for jan 1): ");
+										int timeI = enterInteger("Time (hours only between 08 an 18, and must be two digits): ");
+										booking.setDate(Integer.toString(dateI));
+										booking.setTime(Integer.toString(timeI));
+										key1 = booking.getDate() + booking.getTime() + "a";
+										key2 = booking.getDate() + booking.getTime() + "b";
+										contains8 = tableOfEight.getBookings().containsKey(key1)
+												&& tableOfEight.getBookings().containsKey(key2);
+
+									}
+									tableOfEight.addBooking(booking);
+								}
+							}
+							else if (booking.getNumOfGuests() == 9
+									|| booking.getNumOfGuests() == 10){
+									while (contains10) {
+										System.out.println("Please select another day or time:");
+										int dateI = enterInteger("Date(format 0101 for jan 1): ");
+										int timeI = enterInteger("Time (hours only between 08 an 18, and must be two digits): ");
+										booking.setDate(Integer.toString(dateI));
+										booking.setTime(Integer.toString(timeI));
+										key1 = booking.getDate() + booking.getTime() + "a";
+										contains10 = tableOfTen.getBookings().containsKey(key1);
+									}
+								tableOfTen.addBooking(booking);
+							} else {
+								System.out.format("Sorry, no tables for %d guests, please reduce the number.",
+										booking.getNumOfGuests());
+								finBooking = true;
+								continue;
 							}
 							//we add the customer id to the booking here
-							bookings.get(keyBooking).setCustId(userId);
+							booking.setCustId(userId);
 							//option to book more tables as required
 							int moreBookings = enterInteger(yesNo);
 							while (!optionRange(moreBookings,1,2)) {
@@ -194,10 +280,8 @@ public class Main {
 			}
 			
 			//display all bookings in the database
-			for (Booking b : bookings.values()) {
-				String name = customers.get(b.getCustId()).getFirstName();
-				System.out.format("Customer Name: %S%n", name);
-				System.out.print(b);
+			for (Table t : tables) {
+				System.out.print(t);
 			}
 		} while (!exit);
 	}
