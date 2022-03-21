@@ -2,14 +2,14 @@ public class Staff {
     private String firstName;
     private String lastName;
     private int id;
-    private String user_type;
 
-    public Staff(String firstName, String lastName, int id, String user_type) {
+    public Staff(String firstName, String lastName, int id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;
-        this.user_type = user_type;
     }
+
+    public Staff(){}
 
     public String getFirstName() {
         return firstName;
@@ -23,16 +23,8 @@ public class Staff {
         return lastName;
     }
 
-    public void setLastName(String user_type) {
-        this.user_type = user_type;
-    }
-
-    public String getUserType() {
-        return user_type;
-    }
-
-    public void setUserType(String lastname) {
-        this.lastName = lastname;
+    public void setLastName(String name) {
+        this.lastName = name;
     }
 
     public int getId() {
@@ -45,7 +37,7 @@ public class Staff {
 
     public String toString() {
         return String.format("First Name:" + firstName + "Last Name:" + lastName
-                + "Staff ID:" + id + "User Type:" + user_type);
+                + "Staff ID:" + id);
     }
 
 }
