@@ -5,8 +5,18 @@ import java.util.HashMap;
 public class MethodsAndStorage {
     private static final String YES_NO = "Add another? 1 = yes, 2 = no: ";
     private static final String ERROR = "Invalid input, please read the instructions carefully and try again: ";
+    private static final String SELECT_ITEMS = "Select your items by selecting the id,"
+            + "for multiple items, separate id by commas: ";
 
     private static HashMap<Integer, Customer> customers = new HashMap<>();
+    private static ArrayList<Order> orders = new ArrayList<Order>();
+
+    private static final Menu ITEM_1 = new Menu("Rice", 5.50, 1);
+    private static final Menu ITEM_2 = new Menu("Machboos", 6.50, 2);
+    private static final Menu ITEM_3 = new Menu("Suki", 5.75, 3);
+    private static final Menu ITEM_4 = new Menu("Steak", 8.50, 4);
+    private static final Menu ITEM_5 = new Menu("Saksuka", 5.00, 5);
+    private static final ArrayList<Menu> MAIN_MENU = new ArrayList<Menu>(Arrays.asList(ITEM_1, ITEM_2, ITEM_3, ITEM_4, ITEM_5));
 
     private static final Table TABLE_OF_TWO = new Table(2,2);
     private static final Table TABLE_OF_FOUR = new Table(4,4);
@@ -156,6 +166,47 @@ public class MethodsAndStorage {
 
     public static ArrayList<Table> showBookings(){
         return TABLES;
+    }
+
+    public static void placeOrder(int userId){
+        boolean finOrder = false;
+        do {
+            Order order = new Order(userId);
+            //Show the user all items on the menu
+            int count = 0;
+            System.out.println("Our menu Items: ");
+            while (count < MAIN_MENU.size()) {
+                System.out.println(count);
+                System.out.print(MAIN_MENU.get(count));
+                count ++;
+            }
+            //allow the user select multiple items from the menu,
+            //add all the items selected to the users order
+            String selection = UserInteract.enterString(SELECT_ITEMS);
+            String[] items = selection.split(",");
+            count = 0;
+            while(count < items.length) {
+                order.addToOrder(MAIN_MENU.get(Integer.parseInt(items[count])));
+                count++;
+            }
+            //have the user select take-away or delivery
+            int taOrDel = UserInteract.enterInteger("1 for Takeaway or 2 for delivery?: ");
+            while (!UserInteract.optionRange(taOrDel,1,2)) {
+                taOrDel = UserInteract.enterInteger(ERROR);
+                UserInteract.optionRange(taOrDel,1,2);
+            }
+            if (taOrDel == 1) order.setType("Takeaway");
+            else order.setType("Delivery");
+            //add the order to the database
+            orders.add(order);
+            System.out.println();
+            finOrder = true;
+            //finished = true;
+        }while(!finOrder);
+    }
+
+    public static ArrayList<Order> showOrders(){
+        return orders;
     }
 
 }
