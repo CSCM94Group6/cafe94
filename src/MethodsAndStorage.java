@@ -8,8 +8,8 @@ public class MethodsAndStorage {
     private static final String SELECT_ITEMS = "Select your items by selecting the id,"
             + "for multiple items, separate id by commas: ";
 
-    private static HashMap<Integer, Customer> customers = new HashMap<>();
-    private static ArrayList<Order> orders = new ArrayList<Order>();
+    private static final HashMap<Integer, Customer> CUSTOMERS = new HashMap<>();
+    private static final ArrayList<Order> ORDERS = new ArrayList<Order>();
 
     private static final Menu ITEM_1 = new Menu("Rice", 5.50, 1);
     private static final Menu ITEM_2 = new Menu("Machboos", 6.50, 2);
@@ -31,8 +31,8 @@ public class MethodsAndStorage {
         boolean finished = false;
         do {
             System.out.println("lets get you registered");
-            customers.put(keyCustomer, UserInteract.addCustomer());
-            customers.get(keyCustomer).setId(keyCustomer);
+            CUSTOMERS.put(keyCustomer, UserInteract.addCustomer());
+            CUSTOMERS.get(keyCustomer).setId(keyCustomer);
             keyCustomer++;
             int custOption = UserInteract.enterInteger(YES_NO);
             while (!UserInteract.optionRange(custOption,1,2)) {
@@ -44,7 +44,7 @@ public class MethodsAndStorage {
     }
 
     public static HashMap<Integer, Customer> showCustomers(){
-        return customers;
+        return CUSTOMERS;
     }
 
     public static void makeBooking(){
@@ -198,7 +198,7 @@ public class MethodsAndStorage {
             if (taOrDel == 1) order.setType("Takeaway");
             else order.setType("Delivery");
             //add the order to the database
-            orders.add(order);
+            ORDERS.add(order);
             System.out.println();
             finOrder = true;
             //finished = true;
@@ -206,7 +206,7 @@ public class MethodsAndStorage {
     }
 
     public static ArrayList<Order> showOrders(){
-        return orders;
+        return ORDERS;
     }
 
 }
