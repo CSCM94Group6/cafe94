@@ -7,8 +7,19 @@ public class MethodsAndStorage {
     private static final String ERROR = "Invalid input, please read the instructions carefully and try again: ";
     private static final String SELECT_ITEMS = "Select your items by selecting the id,"
             + "for multiple items, separate id by commas: ";
+    private static final String WAITER_ACTIONS = "Choose an option below:%n" +
+            "1. place order%n" +
+            "2. view my hours%n" +
+            "3. approve bookings%n" +
+            "4. approve deliveries%n";
+
+    private static final int placeOrder = 1;
+    private static final int viewHours = 2;
+    private static final int approveBookings = 3;
+    private static final int approveDelivery = 4;
 
     private static final HashMap<Integer, Customer> CUSTOMERS = new HashMap<>();
+    private static final HashMap<Integer, Staff> STAFF = new HashMap<>();
     private static final ArrayList<Order> ORDERS = new ArrayList<Order>();
 
     private static final Menu ITEM_1 = new Menu("Rice", 5.50, 1);
@@ -16,30 +27,34 @@ public class MethodsAndStorage {
     private static final Menu ITEM_3 = new Menu("Suki", 5.75, 3);
     private static final Menu ITEM_4 = new Menu("Steak", 8.50, 4);
     private static final Menu ITEM_5 = new Menu("Saksuka", 5.00, 5);
-    private static final ArrayList<Menu> MAIN_MENU = new ArrayList<Menu>(Arrays.asList(ITEM_1, ITEM_2, ITEM_3, ITEM_4, ITEM_5));
+    private static final ArrayList<Menu> MAIN_MENU = new ArrayList<Menu>(Arrays.asList(
+            ITEM_1, ITEM_2, ITEM_3, ITEM_4, ITEM_5));
 
     private static final Table TABLE_OF_TWO = new Table(2,2);
     private static final Table TABLE_OF_FOUR = new Table(4,4);
     private static final Table TABLE_OF_EIGHT = new Table(8,8);
     private static final Table TABLE_OF_TEN = new Table(10,10);
-    private static final ArrayList<Table> TABLES = new ArrayList<>(Arrays.asList(TABLE_OF_TWO, TABLE_OF_FOUR, TABLE_OF_EIGHT, TABLE_OF_TEN));
+    private static final ArrayList<Table> TABLES = new ArrayList<>(Arrays.asList(
+            TABLE_OF_TWO, TABLE_OF_FOUR, TABLE_OF_EIGHT, TABLE_OF_TEN));
 
-    private static int keyCustomer = 1;
-    private static int userId = 0;
+    private static int key = 1;
+    private static int customerId = 0;
+    private static int staffId = 0;
 
     public static void addCustomer(){
         boolean finished = false;
         do {
             System.out.println("lets get you registered");
-            CUSTOMERS.put(keyCustomer, UserInteract.addCustomer());
-            CUSTOMERS.get(keyCustomer).setId(keyCustomer);
-            keyCustomer++;
-            int custOption = UserInteract.enterInteger(YES_NO);
-            while (!UserInteract.optionRange(custOption,1,2)) {
-                custOption = UserInteract.enterInteger(ERROR);
-                UserInteract.optionRange(custOption,1,2);
+            while(key % 2 != 0) key++;
+            CUSTOMERS.put(key, UserInteract.addCustomer());
+            CUSTOMERS.get(key).setId(key);
+            key++;
+            int customerOption = UserInteract.enterInteger(YES_NO);
+            while (!UserInteract.optionRange(customerOption,1,2)) {
+                customerOption = UserInteract.enterInteger(ERROR);
+                UserInteract.optionRange(customerOption,1,2);
             }
-            if (custOption == 2) finished = true;
+            if (customerOption == 2) finished = true;
         } while(!finished);
     }
 
@@ -150,7 +165,7 @@ public class MethodsAndStorage {
                 //continue;
             }
             //we add the customer id to the booking here
-            booking.setCustId(userId);
+            booking.setCustId(customerId);
             //option to book more tables as required
             int moreBookings = UserInteract.enterInteger(YES_NO);
             while (!UserInteract.optionRange(moreBookings,1,2)) {
@@ -169,7 +184,7 @@ public class MethodsAndStorage {
     }
 
     public static void placeOrder(int userId){
-        boolean finOrder = false;
+        boolean finOrder;
         do {
             Order order = new Order(userId);
             //Show the user all items on the menu
@@ -190,23 +205,93 @@ public class MethodsAndStorage {
                 count++;
             }
             //have the user select take-away or delivery
-            int taOrDel = UserInteract.enterInteger("1 for Takeaway or 2 for delivery?: ");
-            while (!UserInteract.optionRange(taOrDel,1,2)) {
-                taOrDel = UserInteract.enterInteger(ERROR);
-                UserInteract.optionRange(taOrDel,1,2);
+            if (userId % 2 == 0){
+                int taOrDel = UserInteract.enterInteger("1 for Takeaway or 2 for delivery?: ");
+                while (!UserInteract.optionRange(taOrDel,1,2)) {
+                    taOrDel = UserInteract.enterInteger(ERROR);
+                    UserInteract.optionRange(taOrDel,1,2);
+                }
+                if (taOrDel == 1) order.setType("Takeaway");
+                else {
+                    order.setType("Delivery");
+                    order.setApproved(false);
+                }
             }
-            if (taOrDel == 1) order.setType("Takeaway");
-            else order.setType("Delivery");
             //add the order to the database
             ORDERS.add(order);
             System.out.println();
             finOrder = true;
             //finished = true;
-        }while(!finOrder);
+        } while(!finOrder);
     }
 
     public static ArrayList<Order> showOrders(){
         return ORDERS;
+    }
+
+    public static HashMap<Integer, Staff> showStaff(){
+        return STAFF;
+    }
+
+    public static void addStaff(){
+        boolean finished = false;
+        do {
+            System.out.println("lets get you registered");
+            while(key % 2 != 1) key++;
+            STAFF.put(key, UserInteract.addStaff());
+            STAFF.get(key).setId(key);
+            key++;
+            int staffOption = UserInteract.enterInteger(YES_NO);
+            while (!UserInteract.optionRange(staffOption,1,2)) {
+                staffOption = UserInteract.enterInteger(ERROR);
+                UserInteract.optionRange(staffOption,1,2);
+            }
+            if (staffOption == 2) finished = true;
+        } while(!finished);
+    }
+
+    public static Staff removeStaff(int StaffId){
+        Staff staff = new Staff();
+        if (STAFF.containsKey(staffId)) {
+            staff = STAFF.remove(staffId);
+        }
+        return staff;
+    }
+
+    public static void waiterStuff(int id){
+        Staff waiter = STAFF.get(id);
+        System.out.printf("Hello %S, where do we start?%n", waiter.getFirstName());
+        int waiterChoice = UserInteract.enterInteger(WAITER_ACTIONS);
+        while (!UserInteract.optionRange(waiterChoice, 1, 4)){
+            waiterChoice = UserInteract.enterInteger(ERROR);
+            UserInteract.optionRange(waiterChoice, 1, 4);
+        }
+        if (waiterChoice == placeOrder) placeOrder(waiter.getId());
+        if (waiterChoice == viewHours) System.out.printf("you have %dhrs remaining.%n%n ", waiter.hoursRemaining());
+        if (waiterChoice == approveBookings) {
+            showBookings();
+            int yesOrN0 = UserInteract.enterInteger("Would you like to approve these bookings:%n" +
+                    "Enter 1. yes, or 2.no");
+            while(!UserInteract.optionRange(yesOrN0, 1, 2)){
+                yesOrN0 = UserInteract.enterInteger(ERROR);
+                UserInteract.optionRange(yesOrN0,1,2);
+            }
+            if(yesOrN0 == 1) waiter.approveBooking();
+        }
+        if (waiterChoice == approveDelivery){
+            for (Order o: ORDERS){
+                if (o.getType().equalsIgnoreCase("delivery")){
+                    System.out.println(o);
+                }
+            }
+            int yesOrN0 = UserInteract.enterInteger("Would you like to approve these deliveries:%n" +
+                    "Enter 1. yes, or 2.no");
+            while(!UserInteract.optionRange(yesOrN0, 1, 2)){
+                yesOrN0 = UserInteract.enterInteger(ERROR);
+                UserInteract.optionRange(yesOrN0,1,2);
+            }
+            if(yesOrN0 == 1) waiter.approveDelivery();
+        }
     }
 
 }

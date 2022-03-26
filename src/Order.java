@@ -9,15 +9,28 @@ public class Order {
 	private String type;
 	private ArrayList<Menu> menu;
 	private String dailySpecial;
-	private int custId;
+	private int userId;
+	private boolean approved;
 	
 	public Order(int id) {
 		this.menu = new ArrayList<Menu>();
-		this.custId = id;
+		this.userId = id;
+		this.approved = true;
+		this.type = "Eat-in";
 	}
 	
 	public Order() {}
-	
+
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		if (type.equalsIgnoreCase("takeaway") || type.equalsIgnoreCase("Eat-in")){
+			this.approved = true;
+		} else this.approved = approved;
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -34,12 +47,12 @@ public class Order {
 		this.dailySpecial = dailySpecial;
 	}
 
-	public int getCustId() {
-		return custId;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setCustId(int custId) {
-		this.custId = custId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public void addToOrder(Menu item) {
@@ -51,8 +64,9 @@ public class Order {
 		for (Menu m: menu) {
 			items = items + m;
 		}
-		return String.format("Customer Id: %d%n"
-				+ "Order Type: %s%n"
-				+ "Items: %n[%s]%n%n", custId, type, items);
+		return String.format("User Id: %d%n"
+				+ "Order Type: %s%n" +
+				"Approved: %b"
+				+ "Items: %n[%s]%n%n", userId, type, approved,items);
 	}
 }

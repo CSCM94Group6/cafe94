@@ -71,4 +71,19 @@ public class UserInteract {
         return new Customer(firstName, lastName, id);
 
     }
+
+    /**
+     * The addStaff() method takes no argument, it asks the user to
+     * enter the first and last name. it then
+     * uses these inputs to create a Customer object.
+     */
+    public static Staff addStaff() {
+        String firstName = enterString("First Name: ");
+        String lastName = enterString("Last Name: ");
+        String type = enterString("Enter Type: ");
+        int id = 0;
+        if (type.equalsIgnoreCase("waiter")) return new Waiter(firstName, lastName, id);
+        if (type.equalsIgnoreCase("driver")) return new Driver(firstName, lastName, id);
+        return new Staff(firstName, lastName, id);
+    }
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Staff {
     private String firstName;
     private String lastName;
@@ -10,6 +12,7 @@ public class Staff {
         this.lastName = lastName;
         this.id = id;
         this.hoursToWork = 40;
+        this.totalHoursWorked = 0;
     }
 
     public Staff(){
@@ -54,6 +57,18 @@ public class Staff {
     public String toString() {
         return String.format("First Name:" + firstName + "Last Name:" + lastName
                 + "Staff ID:" + id);
+    }
+
+    public void approveBooking(){}
+
+    public void approveDelivery(){}
+
+    public boolean isWaiter(){
+        return false;
+    }
+
+    public boolean isDriver(){
+        return false;
     }
 
 }

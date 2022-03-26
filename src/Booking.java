@@ -8,21 +8,21 @@ public class Booking {
 	private int custId;
 	private String date;
 	private String time;
-	private boolean approval;
+	private boolean approved;
 	
 	public Booking(int guests, String date, String time) {
 		this.numOfGuests = guests;
 		this.date = date;
 		this.time = time;
-		this.approval = false;
+		this.approved = false;
 	}
 
-	public boolean isApproval() {
-		return approval;
+	public boolean isApproved() {
+		return approved;
 	}
 
-	public void setApproval(boolean approval) {
-		this.approval = approval;
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 
 	public int getNumOfGuests() {
