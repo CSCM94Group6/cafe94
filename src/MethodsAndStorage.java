@@ -12,8 +12,12 @@ public class MethodsAndStorage {
             "2. view my hours%n" +
             "3. approve bookings%n" +
             "4. approve deliveries%n";
+    private static final String DRIVER_ACTIONS = "Choose an option below:%n" +
+            "1. view approved deliveries%n" +
+            "2. view my hours%n";
 
     private static final int placeOrder = 1;
+    private static final int viewApprovedDeliveries = 1;
     private static final int viewHours = 2;
     private static final int approveBookings = 3;
     private static final int approveDelivery = 4;
@@ -259,24 +263,23 @@ public class MethodsAndStorage {
     }
 
     public static void waiterStuff(int id){
-        Staff waiter = STAFF.get(id);
-        System.out.printf("Hello %S, where do we start?%n", waiter.getFirstName());
+        System.out.printf("Hello %S, where do we start?%n", STAFF.get(id).getFirstName());
         int waiterChoice = UserInteract.enterInteger(WAITER_ACTIONS);
         while (!UserInteract.optionRange(waiterChoice, 1, 4)){
             waiterChoice = UserInteract.enterInteger(ERROR);
             UserInteract.optionRange(waiterChoice, 1, 4);
         }
-        if (waiterChoice == placeOrder) placeOrder(waiter.getId());
-        if (waiterChoice == viewHours) System.out.printf("you have %dhrs remaining.%n%n ", waiter.hoursRemaining());
+        if (waiterChoice == placeOrder) placeOrder(id);
+        if (waiterChoice == viewHours) System.out.printf("you have %dhrs remaining.%n%n ", STAFF.get(id).hoursRemaining());
         if (waiterChoice == approveBookings) {
-            showBookings();
+            for (Table t: showBookings()) System.out.println(t);
             int yesOrN0 = UserInteract.enterInteger("Would you like to approve these bookings:%n" +
                     "Enter 1. yes, or 2.no");
             while(!UserInteract.optionRange(yesOrN0, 1, 2)){
                 yesOrN0 = UserInteract.enterInteger(ERROR);
                 UserInteract.optionRange(yesOrN0,1,2);
             }
-            if(yesOrN0 == 1) waiter.approveBooking();
+            if(yesOrN0 == 1) STAFF.get(id).approveBooking();
         }
         if (waiterChoice == approveDelivery){
             for (Order o: ORDERS){
@@ -290,8 +293,26 @@ public class MethodsAndStorage {
                 yesOrN0 = UserInteract.enterInteger(ERROR);
                 UserInteract.optionRange(yesOrN0,1,2);
             }
-            if(yesOrN0 == 1) waiter.approveDelivery();
+            if(yesOrN0 == 1) STAFF.get(id).approveDelivery();
         }
+    }
+
+    public static void driverStuff(int id){
+        System.out.printf("Hello %S, where do we start?%n", STAFF.get(id).getFirstName());
+        int driverChoice = UserInteract.enterInteger(DRIVER_ACTIONS);
+        while (!UserInteract.optionRange(driverChoice, 1, 2)){
+            driverChoice = UserInteract.enterInteger(ERROR);
+            UserInteract.optionRange(driverChoice, 1, 2);
+        }
+        if (driverChoice == viewApprovedDeliveries) {
+            for (Order o: showOrders()){
+                if (o.isApproved()){
+                    System.out.println(o);
+                }
+            }
+        }
+        if (driverChoice == viewHours) System.out.printf("you have %dhrs remaining.%n%n ",
+                STAFF.get(id).hoursRemaining());
     }
 
 }

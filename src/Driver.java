@@ -13,15 +13,4 @@ public class Driver extends Staff{
         return isDriver;
     }
 
-    public ArrayList<Order> showApprovedOrders(){
-        ArrayList<Order> approvedOrders = new ArrayList<>();
-        for (Order o: MethodsAndStorage.showOrders()){
-            if (o.isApproved()){
-                approvedOrders.add(o);
-            }
-        }
-        return approvedOrders;
-    }
-
-
 }

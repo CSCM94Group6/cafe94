@@ -57,10 +57,21 @@ public class Main {
 							UserInteract.optionRange(managerChoice,1,6);
 						}
 
-						if(managerChoice == VIEW_BOOKING) MethodsAndStorage.showBookings();
-						if(managerChoice == VIEW_ORDER) MethodsAndStorage.showOrders();
-						if(managerChoice == VIEW_REPORTS);
-						if(managerChoice == VIEW_STAFF)MethodsAndStorage.showStaff();
+						if(managerChoice == VIEW_BOOKING) {
+							if(MethodsAndStorage.showBookings().isEmpty()) System.out.println("There are no bookings" +
+									"in the database.");
+							else for (Table t: MethodsAndStorage.showBookings()) System.out.println(t);
+						}
+						if(managerChoice == VIEW_ORDER) {
+							if(MethodsAndStorage.showOrders().isEmpty()) System.out.println("There are no orders" +
+									"in the database");
+							else for (Order o: MethodsAndStorage.showOrders()) System.out.println(o);
+						}
+						if(managerChoice == VIEW_REPORTS)System.out.println("Coming soon!");
+						if(managerChoice == VIEW_STAFF) {
+							if(MethodsAndStorage.showStaff().isEmpty()) System.out.println("You have no Staff!");
+							else for(Staff s: MethodsAndStorage.showStaff().values()) System.out.println(s);
+						}
 						if(managerChoice == ADD_STAFF)MethodsAndStorage.addStaff();
 						if(managerChoice == REMOVE_STAFF){
 							int id = UserInteract.enterInteger("please enter staff id: ");
@@ -94,6 +105,18 @@ public class Main {
 									if (yesOrNo == 2) exitWaiter = true;
 								} while (!exitWaiter);
 
+							}
+							if (MethodsAndStorage.showStaff().get(staffId).isDriver()){
+								boolean exitDriver = false;
+								do{
+									MethodsAndStorage.driverStuff(staffId);
+									int yesOrNo = UserInteract.enterInteger("Continue? 1. yes, 2. no: ");
+									while(!UserInteract.optionRange(yesOrNo, 1, 2)){
+										yesOrNo = UserInteract.enterInteger(ERROR);
+										UserInteract.optionRange(yesOrNo,1,2);
+									}
+									if (yesOrNo == 2) exitDriver = true;
+								}while(!exitDriver);
 							}
 						}
 					}
