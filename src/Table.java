@@ -1,3 +1,11 @@
+import javafx.fxml.FXML;
+import java.util.objects;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import java.io.IOException;
 import java.util.HashMap;
 /**
  * Table class represents the tables available at cafe94 on any given day. the restaurant has a total seating
