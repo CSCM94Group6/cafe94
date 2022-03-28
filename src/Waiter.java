@@ -1,3 +1,11 @@
+import javafx.fxml.FXML;
+import java.util.objects;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import java.io.IOException
 import java.util.ArrayList;
 /**
  * The waiter class is an extension of the staff class. It adds a few extra functions for the waiter. It has a method
