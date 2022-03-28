@@ -4,6 +4,7 @@
  * @author purit jessadakannasoon
  * @version 1.0
  */
+
 public class Chef extends Staff{
     private boolean isChef;
 
@@ -27,3 +28,11 @@ public class Chef extends Staff{
         return isChef;
     }
 }
+
+//chef can implement the daily specials
+@FXML
+public void specials() {
+    
+
+ 
+
