@@ -3,7 +3,7 @@ import java.util.ArrayList;
  * The Order Class allows the customer and waiter to make orders. An order may be eat-in, take-away, or delivery. eat-in
  * and take-away orders are approved by default. Delivery orders have to be approved by a waiter.
  * @author Eylul Altun
- * @author Pj
+ * @author Purit jessadakannasoon
  * @author liz Jones
  * @version 1.0
  */

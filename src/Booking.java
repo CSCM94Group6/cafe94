@@ -1,7 +1,7 @@
 /**
  * The Booking class facilitates booking tables at the cafe94. It contains the necessary information required as per
  * specifications.
- * @author Meg Symons
+ * @author Megan Symons
  * @version 1.0
  */
 public class Booking {

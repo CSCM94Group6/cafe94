@@ -1,7 +1,7 @@
 /**
  * the chef class extends the staff class(superclass). it extends implements all the functions of the staff class,
  * and has only one method that indicates to the entire application that it is a chef.
- * @author pj
+ * @author purit jessadakannasoon
  * @version 1.0
  */
 public class Chef extends Staff{

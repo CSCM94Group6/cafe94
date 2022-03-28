@@ -3,7 +3,7 @@ import java.util.HashMap;
  * Table class represents the tables available at cafe94 on any given day. the restaurant has a total seating
  * capacity of 110, and this is taken into account when determining restaurant availability. All tables along with
  * their seating capacities are accounted for.
- * @author Meg Symons
+ * @author Megan Symons
  * @version 1.0
  */
 public class Table {
