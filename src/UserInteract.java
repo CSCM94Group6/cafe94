@@ -1,3 +1,11 @@
+import javafx.fxml.FXML;
+import java.util.objects;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import java.io.IOException;
 import java.util.Scanner;
 /**
  * The UserInteract class process inputs from the console. it ensures the application does not crash when incorrect
