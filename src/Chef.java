@@ -1,3 +1,13 @@
+import javafx.fxml.FXML;
+import java.util.objects;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import java.io.IOException;
+
+
 /**
  * the chef class extends the staff class(superclass). it extends implements all the functions of the staff class,
  * and has only one method that indicates to the entire application that it is a chef.
@@ -6,6 +16,10 @@
  */
 public class Chef extends Staff{
     private boolean isChef;
+    
+    @FXML
+    public button HomeButton
+    public     
 
     /**
      * @param firstName First name of chef.
