@@ -1,8 +1,11 @@
 import java.util.HashMap;
 /**
-* Table class
-* @author meg
-*/
+ * Table class represents the tables available at cafe94 on any given day. the restaurant has a total seating
+ * capacity of 110, and this is taken into account when determining restaurant availability. All tables along with
+ * their seating capacities are accounted for.
+ * @author Meg Symons
+ * @version 1.0
+ */
 public class Table {
     private int seat;
     private int tableID;
@@ -10,7 +13,6 @@ public class Table {
     //Concatenation of the date and time. this ensures that
     //tables are not booked twice for the same time period
     private String keyBooking;
-    //private ArrayList<Booking> bookings;
     private HashMap<String, Booking> bookings;
 
     public Table(int tableID, int seat) {
@@ -36,6 +38,11 @@ public class Table {
         this.tableID = tableID;
     }
 
+    /**
+     * The method <code>isAvailable()</code> takes no arguments.it returns a boolean indicating if a
+     * table is available to be booked.
+     * @return false if a table is not available for the number of guests required, true otherwise.
+     * */
     public boolean isAvailable(){
         if (seat == 2) return bookings.size() < 40;
         else if (seat == 4) return bookings.size() < 40;
@@ -52,6 +59,11 @@ public class Table {
         return bookings;
     }
 
+    /**
+     * The method <code>addBooking()</code> will store a booking in the database is the table required is available
+     * on the day and time for the booking.
+     * @param booking a booking that includes date, time, and number of guests.
+     * */
     public void addBooking(Booking booking) {
         if (bookings.isEmpty() || seat == 10) {
             keyBooking = booking.getDate() + booking.getTime() + "a";

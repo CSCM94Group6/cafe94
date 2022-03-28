@@ -1,7 +1,8 @@
 /**
- * The Booking Class is the basic structure for the booking object.
- * It contains attributes and methods to access the attributes.
- * It also has a toString method for data processing
+ * The Booking class facilitates booking tables at the cafe94. It contains the necessary information required as per
+ * specifications.
+ * @author Meg Symons
+ * @version 1.0
  */
 public class Booking {
 	private int numOfGuests;
@@ -9,7 +10,12 @@ public class Booking {
 	private String date;
 	private String time;
 	private boolean approved;
-	
+
+	/**
+	 * @param guests number of guests expected for this booking.
+	 * @param date date the booking is for.
+	 * @param time time the booking is for.
+	 */
 	public Booking(int guests, String date, String time) {
 		this.numOfGuests = guests;
 		this.date = date;

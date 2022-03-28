@@ -1,8 +1,8 @@
 /**
- * The Menu Class is the basic structure for the menu object.
- * each food item is considered a menu item.
- * It contains attributes and methods to access the attributes.
- * It also has a toString method for data processing
+ * The Menu Class is the basic structure for the menu object. Each menu item is a food item that has a name,
+ * description, price and id.
+ * @author Liz Jones
+ * @version 1.0
  */
 public class Menu {
 	private String item;

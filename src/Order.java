@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 /**
- * The Order Class is the basic structure for the order object.
- * It contains attributes and methods to access the attributes.
- * It also has a toString method for data processing. it also has a menu list
- * that will hold all the items for any instance of the order object.
+ * The Order Class allows the customer and waiter to make orders. An order may be eat-in, take-away, or delivery. eat-in
+ * and take-away orders are approved by default. Delivery orders have to be approved by a waiter.
+ * @author Eylul Altun
+ * @author Pj
+ * @author liz Jones
+ * @version 1.0
  */
 public class Order {
 	private String type;
@@ -11,11 +13,13 @@ public class Order {
 	private String dailySpecial;
 	private int userId;
 	private boolean approved;
+	private boolean ready;
 	
 	public Order(int id) {
 		this.menu = new ArrayList<Menu>();
 		this.userId = id;
 		this.approved = true;
+		this.ready = false;
 		this.type = "Eat-in";
 	}
 	
@@ -25,6 +29,19 @@ public class Order {
 		return approved;
 	}
 
+	public boolean isReady() {
+		return ready;
+	}
+
+	public void setReady(boolean ready) {
+		this.ready = ready;
+	}
+
+	/**
+	 * The <code>setApproved</code> method flags whether an order needs approval, and if it does, allows it
+	 * to be approved.
+	 * @param approved the waiter inputs true to approve an order.
+	 * */
 	public void setApproved(boolean approved) {
 		if (type.equalsIgnoreCase("takeaway") || type.equalsIgnoreCase("Eat-in")){
 			this.approved = true;
@@ -66,7 +83,7 @@ public class Order {
 		}
 		return String.format("User Id: %d%n"
 				+ "Order Type: %s%n" +
-				"Approved: %b"
+				"Approved: %b%n"
 				+ "Items: %n[%s]%n%n", userId, type, approved,items);
 	}
 }

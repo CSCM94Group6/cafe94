@@ -2,7 +2,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * The Methods and Storage class contains the database for staff, customer, orders, and bookings. it also has the
+ * database for the menu. in this class, all objects access the database, process data, and interact with one another.
+ * @author Yusuf Dauda
+ * @author Meg Symons
+ * **/
 public class MethodsAndStorage {
+    // Questions and options to be displayed to the user.
     private static final String YES_NO = "Add another? 1 = yes, 2 = no: ";
     private static final String ERROR = "Invalid input, please read the instructions carefully and try again: ";
     private static final String SELECT_ITEMS = "Select your items by selecting the id,"
@@ -11,21 +18,30 @@ public class MethodsAndStorage {
             "1. place order%n" +
             "2. view my hours%n" +
             "3. approve bookings%n" +
-            "4. approve deliveries%n";
+            "4. approve deliveries%n-> ";
     private static final String DRIVER_ACTIONS = "Choose an option below:%n" +
             "1. view approved deliveries%n" +
-            "2. view my hours%n";
+            "2. view my hours%n-> ";
+    private static final String CHEF_ACTIONS = "Choose an option below:%n" +
+            "1. view pending orders%n" +
+            "2. view my hours%n" +
+            "3. mark orders as ready%n-> ";
 
+    //placeholders for options selected by the user.
     private static final int placeOrder = 1;
     private static final int viewApprovedDeliveries = 1;
+    private static final int viewPendingOrders = 1;
     private static final int viewHours = 2;
     private static final int approveBookings = 3;
+    private final static int orderReady = 3;
     private static final int approveDelivery = 4;
 
+    //database for staff, customer, and orders.
     private static final HashMap<Integer, Customer> CUSTOMERS = new HashMap<>();
     private static final HashMap<Integer, Staff> STAFF = new HashMap<>();
     private static final ArrayList<Order> ORDERS = new ArrayList<Order>();
 
+    //database for menu
     private static final Menu ITEM_1 = new Menu("Rice", 5.50, 1);
     private static final Menu ITEM_2 = new Menu("Machboos", 6.50, 2);
     private static final Menu ITEM_3 = new Menu("Suki", 5.75, 3);
@@ -34,6 +50,7 @@ public class MethodsAndStorage {
     private static final ArrayList<Menu> MAIN_MENU = new ArrayList<Menu>(Arrays.asList(
             ITEM_1, ITEM_2, ITEM_3, ITEM_4, ITEM_5));
 
+    //database for tables
     private static final Table TABLE_OF_TWO = new Table(2,2);
     private static final Table TABLE_OF_FOUR = new Table(4,4);
     private static final Table TABLE_OF_EIGHT = new Table(8,8);
@@ -41,10 +58,15 @@ public class MethodsAndStorage {
     private static final ArrayList<Table> TABLES = new ArrayList<>(Arrays.asList(
             TABLE_OF_TWO, TABLE_OF_FOUR, TABLE_OF_EIGHT, TABLE_OF_TEN));
 
+    //id for customer and staff inputs for console, and key for database entry
     private static int key = 1;
     private static int customerId = 0;
     private static int staffId = 0;
 
+    /**
+     * The <code>addCustomer()</code> method takes no arguments. It adds customer objects to the database, and
+     * automatically assigns IDs to the customers. customer Id is even.
+     */
     public static void addCustomer(){
         boolean finished = false;
         do {
@@ -62,10 +84,17 @@ public class MethodsAndStorage {
         } while(!finished);
     }
 
+    /**
+     * @return a collection of all customers in the database.
+     */
     public static HashMap<Integer, Customer> showCustomers(){
         return CUSTOMERS;
     }
 
+    /**
+     * The <code>makeBooking()</code> method takes no arguments. It adds booking objects to the database only if
+     * the date and time requested for a particular number of guests is available.
+     */
     public static void makeBooking(){
         boolean finBooking = false;
         do {
@@ -183,10 +212,19 @@ public class MethodsAndStorage {
         }while(!finBooking);
     }
 
+    /**
+     * @return a collection of all Tables in the database.
+     */
     public static ArrayList<Table> showBookings(){
         return TABLES;
     }
 
+    /**
+     * The <code>placeOrder()</code> method takes one argument. It adds Order objects to the database as required,
+     * and indicate if the orders are approved or not.
+     * @param userId indicates who is placing the order. the user id determines what options would be made available
+     *               to the user down the line.
+     */
     public static void placeOrder(int userId){
         boolean finOrder;
         do {
@@ -229,14 +267,24 @@ public class MethodsAndStorage {
         } while(!finOrder);
     }
 
+    /**
+     * @return a collection of all Orders in the database.
+     */
     public static ArrayList<Order> showOrders(){
         return ORDERS;
     }
 
+    /**
+     * @return a collection of all Staff in the database.
+     */
     public static HashMap<Integer, Staff> showStaff(){
         return STAFF;
     }
 
+    /**
+     * The <code>addCStaff()</code> method takes no arguments. It adds Staff objects to the database, and
+     * automatically assigns IDs to the customers. Staff Id is odd.
+     */
     public static void addStaff(){
         boolean finished = false;
         do {
@@ -254,6 +302,11 @@ public class MethodsAndStorage {
         } while(!finished);
     }
 
+    /**
+     * The <code>removeStaff()</code> method takes one argument. It deletes the staff with the id from the database.
+     * @param StaffId the id of the staff to be removed.
+     * @return the staff that has been removed.
+     */
     public static Staff removeStaff(int StaffId){
         Staff staff = new Staff();
         if (STAFF.containsKey(staffId)) {
@@ -262,6 +315,10 @@ public class MethodsAndStorage {
         return staff;
     }
 
+    /**
+     * provides an interface in the console to interact with user when user is a waiter.
+     * @param id staff id.
+     */
     public static void waiterStuff(int id){
         System.out.printf("Hello %S, where do we start?%n", STAFF.get(id).getFirstName());
         int waiterChoice = UserInteract.enterInteger(WAITER_ACTIONS);
@@ -274,7 +331,7 @@ public class MethodsAndStorage {
         if (waiterChoice == approveBookings) {
             for (Table t: showBookings()) System.out.println(t);
             int yesOrN0 = UserInteract.enterInteger("Would you like to approve these bookings:%n" +
-                    "Enter 1. yes, or 2.no");
+                    "Enter 1. yes, or 2. no: ");
             while(!UserInteract.optionRange(yesOrN0, 1, 2)){
                 yesOrN0 = UserInteract.enterInteger(ERROR);
                 UserInteract.optionRange(yesOrN0,1,2);
@@ -288,7 +345,7 @@ public class MethodsAndStorage {
                 }
             }
             int yesOrN0 = UserInteract.enterInteger("Would you like to approve these deliveries:%n" +
-                    "Enter 1. yes, or 2.no");
+                    "Enter 1. yes, or 2. no: ");
             while(!UserInteract.optionRange(yesOrN0, 1, 2)){
                 yesOrN0 = UserInteract.enterInteger(ERROR);
                 UserInteract.optionRange(yesOrN0,1,2);
@@ -297,6 +354,10 @@ public class MethodsAndStorage {
         }
     }
 
+    /**
+     * provides an interface in the console to interact with user when user is a driver.
+     * @param id staff id.
+     */
     public static void driverStuff(int id){
         System.out.printf("Hello %S, where do we start?%n", STAFF.get(id).getFirstName());
         int driverChoice = UserInteract.enterInteger(DRIVER_ACTIONS);
@@ -313,6 +374,52 @@ public class MethodsAndStorage {
         }
         if (driverChoice == viewHours) System.out.printf("you have %dhrs remaining.%n%n ",
                 STAFF.get(id).hoursRemaining());
+    }
+
+    /**
+     * provides an interface in the console to interact with user when user is a chef.
+     * @param id staff id.
+     */
+    public static void chefStuff(int id){
+        System.out.printf("Hello %S, where do we start?%n", STAFF.get(id).getFirstName());
+        int chefChoice = UserInteract.enterInteger(CHEF_ACTIONS);
+        while (!UserInteract.optionRange(chefChoice, 1, 3)){
+            chefChoice = UserInteract.enterInteger(ERROR);
+            UserInteract.optionRange(chefChoice, 1, 3);
+        }
+        if (chefChoice == viewPendingOrders){
+            for (Order o: showOrders()){
+                if (!o.isReady()) System.out.println(o);
+            }
+        }
+        if (chefChoice == viewHours) System.out.printf("you have %dhrs remaining.%n%n ",
+                STAFF.get(id).hoursRemaining());
+        if (chefChoice == orderReady){
+            System.out.println("Pending orders: ");
+            for (Order o: showOrders()){
+                if (!o.isReady()){
+                    System.out.println(showOrders().indexOf(o) + ". ");
+                    System.out.println(o);
+                    System.out.println();
+                }
+            }
+            String approve = UserInteract.enterString("Select the number corresponding " +
+                    "to the order you wish to approve, separate multiple orders by a comma: ");
+            String[] items = approve.split(",");
+            int count = 0;
+            while(count < items.length){
+                if(Integer.parseInt(items[count]) < ORDERS.size()
+                        && Integer.parseInt(items[count]) >= 0){
+                    ORDERS.get(Integer.parseInt(items[count])).setReady(true);
+                    count++;
+                } else {
+                    System.out.printf("Order number %s does not exist in the database%n", items[count]);
+                    count = items.length;
+                }
+            }
+
+        }
+
     }
 
 }
