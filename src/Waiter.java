@@ -6,7 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import java.io.IOException
+import java.stage.Screen;// this needs to be implemented in all aswell. (shows the height the width and length of screen)
 import java.util.ArrayList;
+// the waiter need to be able to assign tables to customers. ie res01 on the fxml.                                                                                 
 /**
  * The waiter class is an extension of the staff class. It adds a few extra functions for the waiter. It has a method
  * that indicates to the application that it is a waiter, and methods to approve bookings and deliveries. two extra
