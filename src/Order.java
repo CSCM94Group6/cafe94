@@ -96,6 +96,11 @@ public class Order {
 				"Approved: %b%n"
 				+ "Items: %n[%s]%n%n", userId, type, approved,items);
 	}
+	
+	private chefsdailyspecials(){
+		return dailyspecials;
+	}
+	
 }
 
 //chef adds the specials menu.
