@@ -5,6 +5,7 @@ import java.util.HashMap;
 /**
  * The Methods and Storage class contains the database for staff, customer, orders, and bookings. it also has the
  * database for the menu. in this class, all objects access the database, process data, and interact with one another.
+ *
  * @author Yusuf Dauda
  * @author Meg Symons
  * **/
