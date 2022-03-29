@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import java.io.IOException;
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner; // Import the Scanner class to read text files
 
 
 /**
@@ -40,4 +43,8 @@ public class Chef extends Staff{
     public boolean isChef(){
         return isChef;
     }
+    //txt file that implements the menu. from the 
+   public void specialsMenu(){
+       return specialsMenu;
+   }
 }
