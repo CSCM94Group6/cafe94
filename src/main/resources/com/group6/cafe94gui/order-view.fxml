@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group6.controller.OrderController">
+   <children>
+      <Label layoutX="67.0" layoutY="38.0" text="Todays Special" />
+      <Label layoutX="272.0" layoutY="38.0" text="Beans" />
+      <TextField fx:id="items" layoutX="41.0" layoutY="329.0" prefHeight="25.0" prefWidth="489.0" />
+      <Button layoutX="246.0" layoutY="361.0" mnemonicParsing="false" onAction="#makeOrder" text="Submit Order" />
+      <Label layoutX="56.0" layoutY="304.0" text="Select the number corresponding to your choice, separate multiple choices by a comma" />
+      <Label fx:id="feedback" layoutX="381.0" layoutY="365.0" prefHeight="17.0" prefWidth="190.0" />
+      <Button layoutX="15.0" layoutY="361.0" mnemonicParsing="false" onAction="#backToBookOrOrder" text="Back to book or order" />
+      <TextField fx:id="userid" layoutX="436.0" layoutY="34.0" />
+      <Label layoutX="381.0" layoutY="38.0" text="UserId" />
+      <RadioButton fx:id="delivery" layoutX="349.0" layoutY="365.0" mnemonicParsing="false" text="Delivery" />
+      <RadioButton fx:id="takeaway" layoutX="467.0" layoutY="365.0" mnemonicParsing="false" text="Take-away" />
+      <Label fx:id="feedback" layoutX="54.0" layoutY="275.0" prefHeight="17.0" prefWidth="246.0" />
+      <Button layoutX="436.0" layoutY="279.0" mnemonicParsing="false" onAction="#showMenu" text="Show Menu" />
+      <TextArea fx:id="menu" layoutX="55.0" layoutY="75.0" prefHeight="200.0" prefWidth="489.0" />
+   </children>
+</AnchorPane>

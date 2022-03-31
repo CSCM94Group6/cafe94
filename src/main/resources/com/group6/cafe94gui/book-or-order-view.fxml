@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group6.controller.bookOrOrderController">
+    <children>
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="159.0" layoutY="17.0" prefHeight="46.0" prefWidth="224.0" text="Welcome to Cafe94" />
+        <Button fx:id="bookTable" layoutX="89.0" layoutY="232.0" mnemonicParsing="false" onAction="#switchToBook" text="Book" />
+        <Button fx:id="placeOrder" layoutX="463.0" layoutY="238.0" mnemonicParsing="false" onAction="#switchToOrder" text="Order" />
+      <Button fx:id="bacLogin" layoutX="29.0" layoutY="361.0" mnemonicParsing="false" onAction="#backToCustomerLogin" text="Back to login" />
+    </children>
+</AnchorPane>

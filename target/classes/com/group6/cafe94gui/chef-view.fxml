@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group6.controller.ChefController">
+   <children>
+      <Button layoutX="64.0" layoutY="201.0" mnemonicParsing="false" onAction="#performAction" text="Ok" />
+      <Label layoutX="283.0" layoutY="32.0" text="Hello Chef" />
+      <Label layoutX="282.0" layoutY="65.0" text="Lets begin" />
+      <RadioButton fx:id="hours" layoutX="21.0" layoutY="82.0" mnemonicParsing="false" text="View hours" />
+      <RadioButton fx:id="orders" layoutX="436.0" layoutY="82.0" mnemonicParsing="false" text="View Pending Orders" />
+      <RadioButton fx:id="ready" layoutX="229.0" layoutY="82.0" mnemonicParsing="false" text="Mark Orders As ready" />
+      <Button fx:id="backToStaffLogin" layoutX="39.0" layoutY="338.0" mnemonicParsing="false" onAction="#backToStaffLogin" text="Back to Staff" />
+      <Label layoutX="386.0" layoutY="32.0" text="User Id" />
+      <TextField fx:id="id" layoutX="436.0" layoutY="28.0" />
+      <Label fx:id="hoursLeft" layoutX="25.0" layoutY="107.0" prefHeight="17.0" prefWidth="184.0" />
+      <TextArea fx:id="viewOrder" layoutX="386.0" layoutY="100.0" prefHeight="227.0" prefWidth="200.0" />
+      <TextArea fx:id="markOrder" layoutX="182.0" layoutY="100.0" prefHeight="193.0" prefWidth="200.0" />
+      <TextField fx:id="selection" layoutX="184.0" layoutY="302.0" prefHeight="25.0" prefWidth="192.0" />
+      <Button layoutX="254.0" layoutY="338.0" mnemonicParsing="false" onAction="#markReady" text="Mark Ready" />
+      <Label fx:id="feedback" layoutX="11.0" layoutY="294.0" prefHeight="34.0" prefWidth="163.0" />
+   </children>
+</AnchorPane>
