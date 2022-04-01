@@ -18,6 +18,7 @@ public class DriverController {
     private Stage stage;
     private Scene scene;
     private FXMLLoader fxmlLoader;
+    private int uId;
 
     @FXML
     RadioButton hours;
@@ -28,6 +29,11 @@ public class DriverController {
     @FXML
     TextField id;
 
+    public void setId(int staff){
+        uId = staff;
+        id.setText(Integer.toString(uId));
+    }
+
     public void backToStaffLogin(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(StaffLoginApplication.class.getResource("staff-login-view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -37,12 +43,11 @@ public class DriverController {
     }
 
     public void takeAction(ActionEvent event) throws IOException {
-        int userId = Integer.parseInt(id.getText());
         if(hours.isSelected()){
-            feedback.setText(MethodsAndStorage.driverStuff(userId, 2));
+            feedback.setText(MethodsAndStorage.driverStuff(uId, 2));
         }
         if(delivery.isSelected()){
-            feedback.setText(MethodsAndStorage.driverStuff(userId, 1));
+            feedback.setText(MethodsAndStorage.driverStuff(uId, 1));
         }
     }
 }

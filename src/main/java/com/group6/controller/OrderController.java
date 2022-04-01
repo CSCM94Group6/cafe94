@@ -19,6 +19,7 @@ public class OrderController {
     private Stage stage;
     private Scene scene;
     private FXMLLoader fxmlLoader;
+    private int uId;
 
     @FXML
     TextField items;
@@ -33,6 +34,10 @@ public class OrderController {
     @FXML
     RadioButton takeaway;
 
+    public void setId(int customer){
+        uId = customer;
+        userid.setText(Integer.toString(uId));
+    }
     public void backToBookOrOrder(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(BookOrOrderApplication.class.getResource("book-or-order-view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -43,7 +48,6 @@ public class OrderController {
 
     public void makeOrder(ActionEvent event) throws IOException {
         String selection = items.getText();
-        int id = Integer.parseInt(userid.getText());
         String type = "";
         boolean approved = false;
         if(delivery.isSelected()){
@@ -54,7 +58,7 @@ public class OrderController {
             approved = true;
         }
 
-        String message = MethodsAndStorage.placeOrder(id, selection, type, approved);
+        String message = MethodsAndStorage.placeOrder(uId, selection, type, approved);
 
         feedback.setText(message);
     }

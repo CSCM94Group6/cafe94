@@ -18,6 +18,7 @@ public class BookingController {
     private Stage stage;
     private Scene scene;
     private FXMLLoader fxmlLoader;
+    private int uId;
 
     @FXML
     TextField date;
@@ -27,6 +28,10 @@ public class BookingController {
     TextField guests;
     @FXML
     Label feedback;
+
+    public void setUId(int customer){
+        uId = customer;
+    }
 
     public void backToBookOrOrder(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(BookOrOrderApplication.class.getResource("book-or-order-view.fxml"));
@@ -41,7 +46,7 @@ public class BookingController {
         String getTime = time.getText();
         int numOfGuests = Integer.parseInt(guests.getText());
 
-        String message = MethodsAndStorage.makeBooking(getDate, getTime, numOfGuests);
+        String message = MethodsAndStorage.makeBooking(getDate, getTime, numOfGuests, uId);
 
         feedback.setText(message);
     }

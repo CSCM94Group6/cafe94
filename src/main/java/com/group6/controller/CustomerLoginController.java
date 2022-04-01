@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -38,8 +39,11 @@ public class CustomerLoginController {
         int userId = Integer.parseInt(id.getText());
         if(MethodsAndStorage.showCustomers().containsKey(userId)){
             fxmlLoader = new FXMLLoader(BookOrOrderApplication.class.getResource("book-or-order-view.fxml"));
+            Parent root = fxmlLoader.load();
+            bookOrOrderController b = fxmlLoader.getController();
+            b.setId(userId);
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(fxmlLoader.load());
+            scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         } else {

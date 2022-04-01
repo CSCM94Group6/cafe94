@@ -19,6 +19,7 @@ public class ChefController {
     private Stage stage;
     private Scene scene;
     private FXMLLoader fxmlLoader;
+    private int uId;
 
     @FXML
     RadioButton hours;
@@ -39,6 +40,11 @@ public class ChefController {
     @FXML
     TextField selection;
 
+    public void setId(int staff){
+        uId = staff;
+        id.setText(Integer.toString(uId));
+    }
+
     public void backToStaffLogin(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(StaffLoginApplication.class.getResource("staff-login-view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -48,21 +54,19 @@ public class ChefController {
     }
 
     public void performAction(ActionEvent event) throws IOException {
-        int userId = Integer.parseInt(id.getText());
         if(hours.isSelected()){
-            hoursLeft.setText(MethodsAndStorage.chefStuff(userId, 2,""));
+            hoursLeft.setText(MethodsAndStorage.chefStuff(uId, 2,""));
         }
         if(orders.isSelected()){
-            viewOrder.setText(MethodsAndStorage.chefStuff(userId, 1,""));
+            viewOrder.setText(MethodsAndStorage.chefStuff(uId, 1,""));
         }
         if(ready.isSelected()){
-            markOrder.setText(MethodsAndStorage.chefStuff(userId, 3,""));
+            markOrder.setText(MethodsAndStorage.chefStuff(uId, 3,""));
         }
     }
 
     public void markReady(ActionEvent event) throws IOException{
-        int userId = Integer.parseInt(id.getText());
-        feedback.setText(MethodsAndStorage.chefStuff(userId, 4, selection.getText()));
+        feedback.setText(MethodsAndStorage.chefStuff(uId, 4, selection.getText()));
     }
 
 

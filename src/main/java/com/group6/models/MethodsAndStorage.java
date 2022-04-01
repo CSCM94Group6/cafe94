@@ -62,8 +62,8 @@ public class MethodsAndStorage {
 
     //id for customer and staff inputs for console, and key for database entry
     private static int key = 1;
-    private static int customerId = 0;
-    private static int staffId = 0;
+    //private static int customerId = 0;
+    //private static int staffId = 0;
 
     /**
      * The <code>addCustomer()</code> method takes no arguments. It adds customer objects to the database, and
@@ -90,7 +90,7 @@ public class MethodsAndStorage {
      * The <code>makeBooking()</code> method takes no arguments. It adds booking objects to the database only if
      * the date and time requested for a particular number of guests is available.
      */
-    public static String makeBooking(String date, String time, int guests){
+    public static String makeBooking(String date, String time, int guests, int customerId){
             String message = "Booking Complete";
             Booking booking = new Booking(guests, date, time);
             String key1 = booking.getDate() + booking.getTime() + "a";
@@ -245,9 +245,9 @@ public class MethodsAndStorage {
      * @param StaffId the id of the staff to be removed.
      * @return the staff that has been removed.
      */
-    public static String removeStaff(int StaffId){
+    /*public static String removeStaff(int StaffId){
         return String.valueOf(STAFF.remove(staffId));
-    }
+    }*/
 
     /**
      * provides an interface in the console to interact with user when user is a waiter.

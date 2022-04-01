@@ -18,6 +18,7 @@ public class WaiterController {
     private Stage stage;
     private Scene scene;
     private FXMLLoader fxmlLoader;
+    private int uId;
 
     @FXML
     RadioButton hours;
@@ -36,6 +37,10 @@ public class WaiterController {
     @FXML
     TextField selection;
 
+    public void setId(int staff){
+        uId = staff;
+        id.setText(Integer.toString(uId));
+    }
 
 
     public void backToStaffLogin(ActionEvent event) throws IOException {
@@ -47,35 +52,33 @@ public class WaiterController {
     }
 
     public void takeAction(ActionEvent event) throws IOException {
-        int userId = Integer.parseInt(id.getText());
        if(hours.isSelected()){
-           viewstuff.setText(MethodsAndStorage.waiterStuff(userId, "", 2));
+           viewstuff.setText(MethodsAndStorage.waiterStuff(uId, "", 2));
        }
        else if(bookings.isSelected()){
-         viewstuff.setText(MethodsAndStorage.waiterStuff(userId, "", 3));
+         viewstuff.setText(MethodsAndStorage.waiterStuff(uId, "", 3));
        }
        else if(order.isSelected()){
            viewstuff.setText(String.format("Select items below separated by commas:%n%s", MethodsAndStorage.showMenu()));
        }
        else if(deliveries.isSelected()){
-           viewstuff.setText(MethodsAndStorage.waiterStuff(userId, "",4));
+           viewstuff.setText(MethodsAndStorage.waiterStuff(uId, "",4));
        }
 
     }
 
     public void approveAll(ActionEvent event) throws IOException {
-        int userId = Integer.parseInt(id.getText());
        if (bookings.isSelected()){
-           approvedStuff.setText(MethodsAndStorage.waiterStuff(userId, "",6));
+           approvedStuff.setText(MethodsAndStorage.waiterStuff(uId, "",6));
        }
        else if (deliveries.isSelected()){
-           approvedStuff.setText(MethodsAndStorage.waiterStuff(userId, "",5));
+           approvedStuff.setText(MethodsAndStorage.waiterStuff(uId, "",5));
        }
     }
 
     public void placeOrder(ActionEvent event) throws IOException{
-        int userId = Integer.parseInt(id.getText());
-        String message = MethodsAndStorage.waiterStuff(userId, selection.getText(), 1);
+        int uId = Integer.parseInt(id.getText());
+        String message = MethodsAndStorage.waiterStuff(uId, selection.getText(), 1);
         approvedStuff.setText(message);
     }
 }
