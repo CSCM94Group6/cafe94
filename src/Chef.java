@@ -26,8 +26,4 @@ public class Chef extends Staff{
     public boolean isChef(){
         return isChef;
     }
-    //txt file that implements the menu. from the 
-   public void specialsMenu(){
-       return specialsMenu;
-   }
 }
